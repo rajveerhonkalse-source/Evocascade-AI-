@@ -1,0 +1,42 @@
+services:
+  # ── Backend ─────────────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: evocascade-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the sample repository so the demo path resolves correctly
+      - ./sample_repository:/sample_repository:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+      - SAMPLE_REPO=/sample_repository
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── Frontend ─────────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # During build the frontend calls /api — Nginx will proxy it to backend
+        VITE_API_BASE: /api
+    container_name: evocascade-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+networks:
+  default:
+    name: evocascade-network

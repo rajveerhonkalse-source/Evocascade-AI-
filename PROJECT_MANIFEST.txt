@@ -1,0 +1,6 @@
+Frontend: React + TypeScript + Vite + React Router + React Flow + Recharts
+Backend: Python + FastAPI + AST + GitPython + NetworkX
+Features: Repository Analyzer, Change Analyzer, Impact Analysis, Digital Twin Graph, WhyChain, Test Intelligence, TestGap, Evolution, Evaluation, Reports
+Sample changed function: process_payment()
+Expected impacted functions: generate_invoice(), issue_refund(), checkout(), update_points(), place_order()Academic docs included: docs/EvoCascadeAI_IEEE_Review_Paper.docx, docs/EvoCascade_AI_Project_Document.docx
+Legacy Streamlit prototype included: legacy/EvoCascade_Prototype_v0_1.zip

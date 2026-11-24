@@ -1,0 +1,24 @@
+# ── Backend .dockerignore (placed at project root so compose build context works) ──
+# Python
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/.pytest_cache
+**/.venv
+**/venv
+**/env
+
+# Node
+**/node_modules
+**/dist
+**/.next
+
+# Git objects are large; keep only the sample_repository .git for GitPython
+frontend/.git
+backend/.git
+docs
+legacy
+
+# OS
+**/.DS_Store
+**/Thumbs.db
